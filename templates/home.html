@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+/* Global styles */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+a {
+	text-decoration: none;
+	color: #4CAF50;
+}
+
+a:hover {
+	color: #333;
+}
+
+/* Header styles */
+header {
+	background-color: #fff;
+	box-shadow: 0px 0px 10px #888;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+nav a {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+nav a:hover {
+	color: #4CAF50;
+}
+
+/* Main content styles */
+main {
+	background-color: #fff;
+	margin: 150px auto 50px auto;
+	padding: 50px;
+	max-width: 1000px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #888;
+}
+
+section {
+	margin-bottom: 50px;
+}
+
+h1 {
+	font-size: 48px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: center;
+	
+}
+
+p {
+	line-height: 1.5;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+/* Footer styles */
+footer {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+/* Payment section styles */
+.payment {
+	background-color: #f2f2f2;
+	padding: 50px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #888;
+}
+
+.payment h2 {
+	font-size: 36px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.payment p {
+	font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 20px;
+}
+
+.payment ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.payment li {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.payment li img {
+	width: 50px;
+	margin-right: 20px;
+}
+
+.payment li h3 {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.payment li p {
+	font-size: 18px;
+	line-height: 1.5;
+	margin: 0;
+	margin-left: auto;
+	text-align: right;
+}
+
+@media (max-width: 768px) {
+	nav {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+	nav li {
+		display: block;
+		margin: 10px 0;
+	}
+	
+	main {
+		margin-top: 250px;
+		padding: 20px;
+	}
+	
+	h1 {
+		font-size: 36px;
+	}
+	
+	p {
+		font-size: 16px;
+	}
+	
+	.payment {
+		padding: 20px;
+	}
+	
+	.payment h2 {
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+	
+	.payment li img {
+		width: 40px;
+	}
+	
+	.payment li h3 {
+		font-size: 20px;
+	}
+	
+	.payment li p {
+		font-size: 16px;
+	}
+}
+
+
+
+		*{
+		  font-family: 'Poppins', sans-serif;
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		}
+
+		body{
+		  background-color:#4b4b4b;
+		}
+
+		header{
+		  position: relative;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  z-index: 99;
+		  background-color: #ff4757;
+		}
+
+		.nav{
+		  max-width: 1200px;
+		  margin: auto;
+		  width: 100%;
+		  height: 50px;
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		}
+
+		.logo{
+		  font-size: 1.2rem;
+		  font-weight: 500;
+		  text-decoration: none;
+		  color:#ffffff;
+		}
+
+		.box{
+		  color:white;
+		  width: 30px;
+		  height: 30px;
+		  text-align: center;
+		  position: relative;
+		}
+
+		.cart-count{
+		  position: absolute;
+		  background-color: #2f3542;
+		  top: -5px;
+		  right: 0;
+		  padding: 3px;
+		  height: 20px;
+		  width: 20px;
+		  line-height:20px ;
+		  border-radius: 50%;
+		  z-index: 99;
+		}
+
+		#cart-icon{
+		  font-size: 1.5rem;
+		  cursor: pointer;
+		  padding-top: 10px;
+		}
+
+		img{
+		  width: 100%;
+		}
+
+		.container{
+		  max-width: 1200px;
+		  padding: 1rem;
+		  margin: auto;
+		  width: 100%;
+		}
+
+		h2.title{
+		  font-size: 1.1rem;
+		  font-weight: 500;
+		  margin-bottom: 1.5rem;
+		  color:#ffffff;
+		}
+
+		.shop-content{
+		  display: grid;
+		  grid-template-columns: repeat(auto-fit,minmax(220px,auto));
+		  gap:1.5rem;
+		  justify-content: center;
+		  align-content: center;
+		}
+
+		.book-box{
+		  position: relative;
+		  background-color: #fff;
+		  padding: 10px;
+		  box-shadow: 0 1px 4px rgba(40, 37, 37, 0.1);
+		  border-radius: 3px;
+		}
+
+		.pic{
+		  overflow: hidden;
+		  max-width: 100%;
+          max-height: 100%;
+          display: block;	
+		}
+
+		.pic:hover img{
+		transform: scale(1.2);
+		}
+
+		.book-img{
+		  transition: 0.4s;
+		  object-fit: cover;
+		}
+
+		.book-title{
+		  font-size: 1rem;
+		  font-weight: 400;
+		  color:#ff6348;
+		}
+		.title-div{
+			margin-bottom:10%;
+			padding: 5px;
+		}
+
+		.book-price{
+		  padding: 5px;
+		  position: absolute;
+		  font-weight:600 ;
+		  bottom: 0;
+		  
+		}
+
+		.add-cart{
+		  position: absolute;
+		  bottom: 0;
+		  right: 0;
+		  background-color: #2ed573;
+		  color:white;
+		  padding: 10px;
+		  font-size: 1.1rem;
+		  cursor: pointer;
+		  transition: 0.5s;
+		}
+
+		.add-cart:hover{
+		  background-color:rgba(255, 0, 0, 0.786);
+		}
+		  
+
+		.cart{
+		  position: fixed;
+		  top: 0;
+		  right: -100%;
+		  width: 400px;
+		  height: 100vh;
+		  overflow-y: auto;
+		  overflow-x: hidden;
+		  padding: 20px;
+		  background-color: white;
+		  box-shadow: 0 1px 4px rgba(40, 37, 37, 0.1);
+		  z-index: 100;
+		}
+
+		.cart-active{
+		  right:0;
+		  transition: 0.5s;
+		}
+
+		.cart-title{
+		  text-align: center;
+		  font-size: 1.5rem;
+		  font-weight: 500;
+		  margin-bottom: 1rem;
+		  padding-bottom:20px ;
+		  border-bottom: 1px solid rgba(0,0,0,0.1);
+		}
+
+		.cart-box{
+		  display: grid;
+		  grid-template-columns: 32% 50% 18%;
+		  align-items: center;
+		  gap: 1rem;
+		  margin-top: 1rem;
+		  border-bottom: 1px solid rgba(0,0,0,0.1);
+		  padding-bottom: 10px;
+		}
+
+		.cart-img{
+		  width: 75px;
+		  height: 75px;
+		  object-fit: cover;
+		  border:2px solid  rgba(0,0,0,0.1);
+		  padding: 5px;
+		}
+		.detail-box{
+		  display: grid;
+		  row-gap: 0.5rem;  
+		}
+
+		.price-box{
+		  display: flex;
+			justify-content: space-between; 
+		}
+
+		.cart-book-title{
+		   font-size: 1rem;
+		   text-transform: uppercase;
+		   color:#ff6348;
+		   font-weight: 500;
+		}
+
+		.cart-price{
+		  font-weight: 500;
+		}
+
+		.cart-quantity{
+		  border:1px solid rgba(0,0,0,0.1);
+		  outline:none ;
+		  width: 2.4rem;
+		  text-align: center;
+		  font-size: 1rem;
+		}
+
+		.cart-remove{
+		  font-size: 24px;
+		  color:red;
+		  cursor: pointer;
+		}
+
+		.total{
+		  display: flex;
+		  justify-content: flex-end;
+		  margin-top: 1.5rem;
+		}
+
+		.total-title{
+		  font-size: 1rem;
+		  font-weight: 600;
+		}
+
+		.total-price{
+		  margin-left: 0.5rem;
+		}
+
+		.btn-buy{
+		  padding: 12px 20px;
+		  background-color:#2f3542;
+		  color:#fff;
+		  border: none;
+		  font-size: 1rem;
+		  font-weight: 500;
+		  cursor: pointer;
+		}
+
+		#cart-close{
+		  position: absolute;
+		  top: 1rem;
+		  right: 0.8rem;
+		  font-size: 2rem;
+		  cursor: pointer;
+		}
+		
+		
+		.topnav {
+		padding-left: 65%;
+		  overflow: hidden;
+		  background-color: #333;
+		  justify-content: space-between;
+		}
+
+		.topnav a {
+		  float: left;
+		  color: #f2f2f2;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+
+		.topnav a:hover {
+		  background-color: #ddd;
+		  color: black;
+		}
+
+		/* Create a right-aligned (split) link inside the navigation bar */
+		.topnav a.split {
+		  float: right;
+		  background-color: #04AA6D;
+		  color: white;
+		}
+	.footer {
+			background-color: #ff4757;
+			color: #fff;
+			padding: 1rem 0;
+			margin-top: 2rem;
+		}
+		
+		body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f2f2f2;
+}
+
+#contactus-div {
+	background-color: #fff;
+	margin: 50px auto;
+	padding: 20px;
+	max-width: 60%;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #888;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	font-weight: bold;
+}
+
+input[type=text], input[type=email], textarea {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: #45a049;
+}
+	</style>
+	
+	
+</head>
+<body>
+  <header>
+    <div class="nav">
+
+      <a href="#" class="logo">
+		<i class="fa fa-book" aria-hidden="true"></i>
+         &nbsp;&nbsp;&nbsp;The Bookshelf
+      </a>
+	
+      <div class="box">
+        <div class="cart-count">0</div>
+        <ion-icon name="cart"  id="cart-icon" ></ion-icon>
+      </div>
+
+      <div class="cart">
+        <div class="cart-title">Cart Items</div>
+        <div class="cart-content">
+<!--
+          <div class="cart-box">
+            <img src="images/97.jpg" class="cart-img">
+            <div class="detail-box">
+              <div class="cart-book-title">Special Dosai</div>
+              <div class="price-box">
+                <div class="cart-price">Rs.72</div>
+                 <div class="cart-amt">Rs.72</div>
+             </div>
+              <input type="number" value="1" class="cart-quantity">
+            </div>
+            <ion-icon name="trash" class="cart-remove"></ion-icon>
+          </div>
+
+          <div class="cart-box">
+            <img src="images/97.jpg" class="cart-img">
+            <div class="detail-box">
+              <div class="cart-book-title">Special Dosai</div>
+              <div class="price-box">
+                <div class="cart-price">Rs.72</div>
+                 <div class="cart-amt">Rs.72</div>
+             </div>
+              <input type="number" value="1" class="cart-quantity">
+            </div>
+            <ion-icon name="trash" class="cart-remove"></ion-icon>
+          </div>
+        -->
+        </div>
+        
+      <div class="total">
+        <div class="total-title">Total</div>
+        <div class="total-price"><i class="fa fa-eur" aria-hidden="true"></i> 0</div>
+      </div>
+
+      <button class="btn-buy">Place Order</button>
+
+      <ion-icon name="close" id="cart-close"></ion-icon>
+
+      </div>
+    </div>
+	<div class="topnav">
+	  <a class="active" id="nav-opt1">About Us</a>
+	  <a id="nav-opt2"> Books</a>
+	  <a id="nav-opt3">Contact Us</a>
+	</div>
+  </header>
+  <div class="container" id="aboutus-div" hidden>
+		<section id="about">
+			<h1>About Us</h1>
+			<p>The Bookshelf is a family-owned online bookstore founded in 2021. Our mission is to provide book lovers with a wide selection of high-quality books at affordable prices. We believe that reading is not only a hobby, but also a way to expand your knowledge and enrich your life.</p>
+			<p>At The Bookshelf, we pride ourselves on our knowledgeable and friendly staff. Whether you're looking for a specific book recommendation or just want to chat about your favorite author, we're always happy to help.</p>
+			<p>We are proud to accept a variety of payment options, including credit cards, PayPal, and cryptocurrency. We believe that cryptocurrency is the future of online payments, and we're excited to offer this option to our customers. With cryptocurrency, you can make purchases quickly, securely, and without the need for a bank account or credit card.</p>
+			<p>Thank you for choosing The Bookshelf as your go-to destination for all things books!</p>
+		</section>
+  </div>
+  <div class="container" id="books-div" >
+    <h2 class="title">Discover the Best Book</h2>
+    <div class="shop-content">
+
+
+      <div class="book-box">
+        <div class="pic">
+          <img src="img/book1.jpg" class="book-img">
+        </div>
+        <div class="title-div">
+		<h2 class="book-title">Killing Thatcher: The IRA, the Manhunt and the Long War on the Crown</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 13.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+
+
+      <div class="book-box">
+        <div class="pic"><img src="img/book2.jpg" class="book-img"></div>
+        <div class="title-div">
+		<h2 class="book-title">Old God’s Time</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 17.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book3.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">The Lock-Up</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 11.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book4.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">It Ends With Us</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 8.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book5.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Lessons in Chemistry</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 9.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book6.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Close to Home</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 13.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book7.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Strange Sally Diamond</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 12.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+  
+  
+      <div class="book-box">
+        <div class="pic"><img src="img/book9.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">The Last Days Of Joy</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 13.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+	  
+	  <div class="book-box">
+        <div class="pic"><img src="img/book10.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Hell Breaks Loose</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 11.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+	  
+	  <div class="book-box">
+        <div class="pic"><img src="img/book11.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Bunny vs Monkey: Multiverse Mix-up!</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 9.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+	  
+	  <div class="book-box">
+        <div class="pic"><img src="img/book12.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">Robodog</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 12.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+	  
+	  <div class="book-box">
+        <div class="pic"><img src="img/book8.jpg" class="book-img"></div>
+        <div class="title-div"><h2 class="book-title">The Girl from Donegal</h2></div>
+        <span class="book-price"><i class="fa fa-eur" aria-hidden="true"></i> 12.99</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+		
+    </div>
+	
+  </div>
+  <div class="container" id="contactus-div" hidden>
+		<h1>Contact Us</h1>
+		<form>
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" placeholder="Your name.." required>
+
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" placeholder="Your email.." required>
+
+			<label for="mobile">Mobile</label>
+			<input type="text" id="mobile" name="mobile" placeholder="mobile.." optional>
+
+			<label for="message">Message</label>
+			<textarea id="message" name="message" placeholder="Write something.." style="height:200px" required></textarea>
+
+			<input type="submit" value="Submit">
+		</form>
+  </div>
+  <div class="footer text-center">
+	<center><p>&copy; 2023 Book Retail Website. All Rights Reserved.</p><center>
+</div>
+	 <script>
+	 $(document).ready(function(){
+		  $("#nav-opt1").click(function(){
+				$(".container").hide();
+				$("#aboutus-div").show();
+		  });
+	  });
+	  
+	  $(document).ready(function(){
+		  $("#nav-opt2").click(function(){
+				$(".container").hide();
+				$("#books-div").show();
+		  });
+	  });
+	  
+	  $(document).ready(function(){
+		  $("#nav-opt3").click(function(){
+				$(".container").hide();
+				$("#contactus-div").show();
+		  });
+	  });
+	 </script>
+  <script>
+  
+		const btnCart=document.querySelector('#cart-icon');
+		const cart=document.querySelector('.cart');
+		const btnClose=document.querySelector('#cart-close');
+
+		btnCart.addEventListener('click',()=>{
+		  cart.classList.add('cart-active');
+		});
+
+		btnClose.addEventListener('click',()=>{
+		  cart.classList.remove('cart-active');
+		});
+
+		document.addEventListener('DOMContentLoaded',loadFood);
+
+		function loadFood(){
+		  loadContent();
+
+		}
+
+		function loadContent(){
+		  //Remove Food Items  From Cart
+		  let btnRemove=document.querySelectorAll('.cart-remove');
+		  btnRemove.forEach((btn)=>{
+			btn.addEventListener('click',removeItem);
+		  });
+
+		  //Product Item Change Event
+		  let qtyElements=document.querySelectorAll('.cart-quantity');
+		  qtyElements.forEach((input)=>{
+			input.addEventListener('change',changeQty);
+		  });
+
+		  //Product Cart
+		  
+		  let cartBtns=document.querySelectorAll('.add-cart');
+		  cartBtns.forEach((btn)=>{
+			btn.addEventListener('click',addCart);
+		  });
+
+		  updateTotal();
+		}
+
+
+		//Remove Item
+		function removeItem(){
+		  if(confirm('Are Your Sure to Remove')){
+			let title=this.parentElement.querySelector('.cart-book-title').innerHTML;
+			itemList=itemList.filter(el=>el.title!=title);
+			this.parentElement.remove();
+			loadContent();
+		  }
+		}
+
+		//Change Quantity
+		function changeQty(){
+		  if(isNaN(this.value) || this.value<1){
+			this.value=1;
+		  }
+		  loadContent();
+		}
+
+		let itemList=[];
+
+		//Add Cart
+		function addCart(){
+		 let food=this.parentElement;
+		 let title=food.querySelector('.book-title').innerHTML;
+		 let price=food.querySelector('.book-price').innerHTML;
+		 let imgSrc=food.querySelector('.book-img').src;
+		 //console.log(title,price,imgSrc);
+		 
+		 let newProduct={title,price,imgSrc}
+
+		 //Check Product already Exist in Cart
+		 if(itemList.find((el)=>el.title==newProduct.title)){
+		  alert("Product Already added in Cart");
+		  return;
+		 }else{
+		  itemList.push(newProduct);
+		 }
+
+
+		let newProductElement= createCartProduct(title,price,imgSrc);
+		let element=document.createElement('div');
+		element.innerHTML=newProductElement;
+		let cartBasket=document.querySelector('.cart-content');
+		cartBasket.append(element);
+		loadContent();
+		}
+
+
+		function createCartProduct(title,price,imgSrc){
+
+		  return `
+		  <div class="cart-box">
+		  <img src="${imgSrc}" class="cart-img">
+		  <div class="detail-box">
+			<div class="cart-book-title">${title}</div>
+			<div class="price-box">
+			  <div class="cart-price">${price}</div>
+			   <div class="cart-amt">${price}</div>
+		   </div>
+			<input type="number" value="1" class="cart-quantity">
+		  </div>
+		  <ion-icon name="trash" class="cart-remove"></ion-icon>
+		</div>
+		  `;
+		}
+
+		function updateTotal()
+		{
+		  const cartItems=document.querySelectorAll('.cart-box');
+		  const totalValue=document.querySelector('.total-price');
+
+		  let total=0;
+
+		  cartItems.forEach(product=>{
+			let priceElement=product.querySelector('.cart-price');
+			let price=parseFloat(priceElement.innerHTML.replace("<i class=\"fa fa-eur\" aria-hidden=\"true\"></i> ",""));
+			let qty=product.querySelector('.cart-quantity').value;
+			total+=(price*qty);
+			product.querySelector('.cart-amt').innerHTML="<i class=\"fa fa-eur\" aria-hidden=\"true\"></i> "+(price*qty);
+
+		  });
+
+		  totalValue.innerHTML='<i class=\"fa fa-eur\" aria-hidden=\"true\"></i> '+total;
+
+
+		  // Add Product Count in Cart Icon
+
+		  const cartCount=document.querySelector('.cart-count');
+		  let count=itemList.length;
+		  cartCount.innerHTML=count;
+
+		  if(count==0){
+			cartCount.style.display='none';
+		  }else{
+			cartCount.style.display='block';
+		  }
+
+
+		}
+	</script>
+
+</body>
+</html>
