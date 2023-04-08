@@ -462,7 +462,7 @@ footer {
 		
 		
 		.topnav {
-		padding-left: 60%;
+		padding-left: 50%;
 		  overflow: hidden;
 		  background-color: #333;
 		  justify-content: space-between;
@@ -517,9 +517,12 @@ footer {
 	max-width: 60%;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #888;
+	margin-bottom:5%;
 }
-
-form {
+iframe{
+	padding:5%;
+}
+#form-div {
 	display: flex;
 	flex-direction: column;
 }
@@ -576,3 +579,21 @@ input[type=submit]:hover {
 #outer-div2{
 	margin-top:3%;
 }
+
+#show-msg-div{
+	margin: 5%;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+  }
+  
+  th, td {
+	text-align: left;
+	padding: 8px;
+  }
+
+  #payment-div{
+	padding-bottom:10%;
+  }

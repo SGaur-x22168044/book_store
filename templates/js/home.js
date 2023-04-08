@@ -1,7 +1,7 @@
 	  $(document).ready(function(){
 			$("#nav-opt4").click(function(){
 				  $(".container").hide();
-				  $("#matmask-div").show();
+				  $("#payment-div").show();
 			});
 	  });
         $(document).ready(function(){
@@ -41,6 +41,7 @@
 		const btnCart=document.querySelector('#cart-icon');
 		const cart=document.querySelector('.cart');
 		const btnClose=document.querySelector('#cart-close');
+		let total=0;
 
 		btnCart.addEventListener('click',()=>{
 		  cart.classList.add('cart-active');
@@ -152,7 +153,7 @@
 		  const cartItems=document.querySelectorAll('.cart-box');
 		  const totalValue=document.querySelector('.total-price');
 
-		  let total=0;
+		  total = 0;
 
 		  cartItems.forEach(product=>{
 			let priceElement=product.querySelector('.cart-price');
@@ -183,7 +184,8 @@
 
 
 	//---------------------------------------------------------------------------------------------------------
-			const getbookcontent = async() => {
+	const getbookcontent = async() => {
+				
 				var book = document.getElementById('booktitle').value.toLowerCase();
 
 				const address = "0x1143323236545f4f983649b2962c5143d04cbb1f";
@@ -354,3 +356,495 @@
 				document.getElementById("outer-div2").style.display = 'block';
 				
 			}
+
+
+//--------------------------CONTACT US ----------------------------------------------------------------
+const sendmessage = async() => {
+var name = document.getElementById("name").value;
+	var email = document.getElementById("email").value;
+	var subject = document.getElementById("subject").value;
+	var message = document.getElementById("message").value;
+	console.log(name);
+	console.log(email);
+	console.log(subject);
+	console.log(message);
+
+	let account;
+	if(window.ethereum !== "undefined") {
+		const accounts = await ethereum.request({method: "eth_requestAccounts"});
+		account = accounts[0];
+	}
+
+const address = "0x82acfa9e1b005fb540a008c1a791f5e5f941432b";
+const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "subject",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "content",
+				"type": "string"
+			}
+		],
+		"name": "sendMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllMessages",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "subject",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ContactUs.Message[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getMessage",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "subject",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ContactUs.Message",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getNumMessages",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+const owner = "0x8F3d1A824CF79f0D67bC74341337a4Af7c0527De";
+const rpcURL = 'https://sepolia.infura.io/v3/9af3d49403744c9c9a89c430f843dedc';
+window.web3 = await new Web3(window.ethereum);
+window.contract = await new window.web3.eth.Contract(abi, address);
+await contract.methods.sendMessage(name, email, subject, message).send({from:account});
+}
+
+const getmessage = async() => {
+	const address = "0x82acfa9e1b005fb540a008c1a791f5e5f941432b";
+const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "subject",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "content",
+				"type": "string"
+			}
+		],
+		"name": "sendMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllMessages",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "subject",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ContactUs.Message[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getMessage",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "subject",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ContactUs.Message",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getNumMessages",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+	const rpcURL = 'https://sepolia.infura.io/v3/9af3d49403744c9c9a89c430f843dedc';
+	window.web3 = await new Web3(rpcURL);
+	window.contract = await new window.web3.eth.Contract(abi, address);
+
+	const data = await contract.methods.getAllMessages().call();
+	const datasize = await contract.methods.getNumMessages().call();
+	const table = document.getElementById("table-id"); 
+	i = 1 ;
+
+	table.innerHTML = "";
+
+	const headerRow = table.insertRow();
+	const snoHeader = headerRow.insertCell(0);
+	const nameHeader = headerRow.insertCell(1);
+	const emailHeader = headerRow.insertCell(2);
+	const subjectHeader = headerRow.insertCell(3);
+	const msgHeader = headerRow.insertCell(4);
+
+	snoHeader.innerHTML = "S.No.";
+	nameHeader.innerHTML = "Name";
+	emailHeader.innerHTML = "Email";
+	subjectHeader.innerHTML = "Subject";
+	msgHeader.innerHTML = "Message";
+
+	data.forEach((obj) => {
+		const row = table.insertRow();
+		const snoCell = row.insertCell(0);
+		const nameCell = row.insertCell(1);
+		const emailCell = row.insertCell(2);
+		const subjectCell = row.insertCell(3);
+		const msgCell = row.insertCell(4);
+		const timeCell = row.insertCell(5);
+		
+		const date = new Date(timeCell);
+		
+		snoCell.innerHTML = i;
+		nameCell.innerHTML = obj.name;
+		emailCell.innerHTML = obj.email;
+		subjectCell.innerHTML = obj.subject;
+		msgCell.innerHTML = obj.content;
+		//timeCell.innerHTML = date;
+
+		i++;
+	});
+
+}
+
+//------------------------Payment------------------------------------------------------------------------------------
+
+let account;
+const connectMetamask = async() => {
+	if(window.ethereum !== "undefined") {
+		const accounts = await ethereum.request({method: "eth_requestAccounts"});
+		account = accounts[0];
+		document.getElementById("account").value = ` ${account}`;
+	}
+}
+
+const connectContract = async() => {
+	const ABI = [
+		{
+			"inputs": [],
+			"name": "deposit",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address payable",
+					"name": "_to",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_amount",
+					"type": "uint256"
+				}
+			],
+			"name": "withdraw",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_address",
+					"type": "address"
+				}
+			],
+			"name": "getAccountBalance",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getAddress",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getContractBalance",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		}
+	];
+	const Address = "0x16631159c2dcb368b0fb95051a873d49c83e6582"; // Taking Address from Remix 
+	window.web3 = await new Web3(window.ethereum);
+	window.contract = await new window.web3.eth.Contract(ABI, Address);
+	document.getElementById("metamaskConnectStatus").value = "Connected to Contract";
+
+}
+const getContractAccount = async() => {
+	console.log("get contract");
+	const data = await window.contract.methods.getAddress().call();
+	document.getElementById("contractAccount").value = data;
+}
+const getContractBal = async() => {
+	connectMetamask();
+	connectContract();
+	console.log("get contract balance");
+	const data = await window.contract.methods.getContractBalance().call();
+	document.getElementById("Balance").value = data;
+}
+const SendEtherToContract = async() => {
+	console.log("send ether");
+	const amount = document.getElementById("depositAmount").value;
+    await window.contract.methods.deposit().send({from: account, value: amount});
+	getContractBal();
+}
+const payEther = async() => {
+	console.log("pay ether");
+	
+
+}
+
+const getAccountBal = async() => {
+	connectMetamask();
+	connectContract();
+	const data = await window.contract.methods.getAccountBalance(account).call();
+	document.getElementById("accountBal").value = data;
+	console.log("getAccountBal > " +data);
+}
+
+const placeOrder=document.querySelector('#placeOrder');
+placeOrder.addEventListener('click',()=>{
+	cart.classList.remove('cart-active');
+  });
+
+const placeOrderbtn = async() => {
+	var elements = document.getElementsByClassName('container');
+	for (var i = 0; i < elements.length; i++){
+        elements[i].style.display = 'none';
+    }
+	document.getElementById('payment-div').style.display = 'block';
+	document.getElementById('WithdrawAmount').value = total;
+}
+

@@ -11,7 +11,7 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+	
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 
@@ -69,7 +69,7 @@
         <div class="total-price"><i class="fa fa-eur" aria-hidden="true"></i> 0</div>
       </div>
 
-      <button class="btn-buy">Place Order</button>
+      <button class="btn-buy" id="placeOrder" onclick="placeOrderbtn()">Place Order</button>
 
       <ion-icon name="close" id="cart-close"></ion-icon>
 
@@ -80,7 +80,7 @@
 	  <a id="nav-opt2"> Books</a>
 	  <a id="nav-opt5"> Books Content </a>
 	  <a id="nav-opt3">Contact Us</a>
-      <a id="nav-opt4">Metamask</a>
+      <a id="nav-opt4">Payment</a>
 	</div>
   </header>
  
@@ -186,15 +186,12 @@
   </div>
   <div class="container" id="contactus-div" hidden>
 		<h1>Contact Us</h1>
-		<form>
+		<div id="form-div">
 			<label for="name">Name</label>
 			<input type="text" id="name" name="name" placeholder="Your name.." required>
 
 			<label for="email">Email</label>
 			<input type="email" id="email" name="email" placeholder="Your email.." required>
-
-			<label for="mobile">Mobile</label>
-			<input type="text" id="mobile" name="mobile" placeholder="Your mobile.." optional>
 
 			<label for="subject">Subject</label>
 			<input type="text" id="subject" name="subject" placeholder="Subject.." optional>
@@ -202,11 +199,111 @@
 			<label for="message">Message</label>
 			<textarea id="message" name="message" placeholder="Write something.." style="height:200px" required></textarea>
 
-			<input type="submit" value="Submit">
-		</form>
+			<input type="submit" value="Submit" onclick="sendmessage()">
+		</div>
+
+		<div id="show-msg-div">
+		<input type="submit" onclick="getmessage()" value="Show Messages"></input>
+		<div id="display-msg">
+			<table id="table-id">
+				<!-- <tr>
+					<th>S.No.</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Subject</th>
+					<th>Message</th>
+					<th>Time</th>
+				</tr> -->
+			</table>
+		</div>
+		</div>	
+
+		<div id="google-maps-div">
+
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1107.11520206469!2d-6.24320159458315!3d53.3487478255979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e8cd86e97e7%3A0x6d51b774ee7fa935!2sNational%20College%20of%20Ireland!5e1!3m2!1sen!2sie!4v1680918954423!5m2!1sen!2sie" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</div>
   </div>
-  <div class="container" id="matmask-div" hidden>
-	ye matamask wala div hai.
+  <div class="container" id="payment-div" hidden>
+	<table>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				User Account:
+			</td>
+			<td>
+				<input type="text" id="account" name="account" placeholder="User Account"  readonly>
+			</td>
+			<td>
+				<input type="submit" value="Connect to Metamask" onclick="connectMetamask()"> 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				Status
+			</td>
+			<td>
+				<input type="text" id="metamaskConnectStatus" name="metamaskConnectStatus" placeholder="Status"  readonly>
+			</td>
+			<td>
+				<input type="submit" value="Connect to Contract" onclick="connectContract()"> 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				Contract Account:
+			</td>
+			<td>
+				<input type="text" id="contractAccount" name="account" placeholder="Contract Account"  readonly>
+			</td>
+			<td>
+				<input type="submit" value="Contract Account" onclick="getContractAccount()"> 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				Contract Balance:
+			</td>
+			<td>
+				<input type="text" id="Balance" name="account" placeholder="Contract Balance" readonly>
+			</td>
+			<td>
+				<input type="submit" value="Contract Balance" onclick="getContractBal()"> 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				Enter Amount:
+			</td>
+			<td>
+				<input type="text" id="depositAmount" name="account" placeholder="Enter Amount" required>
+			</td>
+			<td>
+				<input type="submit" value="Send Ether to Contract" onclick="SendEtherToContract()"> 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; padding-right: 3%;">
+				Account Balance:
+			</td>
+			<td>
+				<input type="text" id="accountBal" name="account" placeholder="Account Balance" >
+			</td>
+			<td>
+				<input type="submit" value="Account Balance" onclick="getAccountBal()"> 
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" id="withdrawAddress" name="account" placeholder="Withdraw Address">
+			</td>
+			<td>
+				<input type="text" id="WithdrawAmount" name="account" placeholder="Enter Amount" >
+			</td>
+			<td>
+				<input type="submit" value="Pay Ether to Address" onclick="payEther()"> 
+			</td>
+		</tr>
+	
+</table>
   </div>
   <div class="footer">
 	<center><p>&copy; 2023 The Bookshelf. All Rights Reserved.</p><center>
