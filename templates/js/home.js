@@ -270,10 +270,87 @@
 				window.web3 = await new Web3(rpcURL);
 				window.contract = await new window.web3.eth.Contract(abi, address);
 				const data = await contract.methods.getBook(book).call(); 
-				document.getElementById("show-book-content-div").innerHTML = data+".";
-				document.getElementById("show-book-content-div").style.display = 'block';
+				if(data!='')
+				{document.getElementById("show-book-content-div").innerHTML = data+".";}
+				else{document.getElementById("show-book-content-div").innerHTML = 'Not Available.';}
+				document.getElementById("outer-div").style.display = 'block';
 
+				const abi2 = [
+					{
+						"inputs": [
+							{
+								"internalType": "string",
+								"name": "bookTitle",
+								"type": "string"
+							}
+						],
+						"name": "addRights",
+						"outputs": [],
+						"stateMutability": "nonpayable",
+						"type": "function"
+					},
+					{
+						"inputs": [],
+						"stateMutability": "nonpayable",
+						"type": "constructor"
+					},
+					{
+						"inputs": [
+							{
+								"internalType": "string",
+								"name": "bookTitle",
+								"type": "string"
+							}
+						],
+						"name": "checkRights",
+						"outputs": [
+							{
+								"internalType": "bool",
+								"name": "",
+								"type": "bool"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					},
+					{
+						"inputs": [],
+						"name": "owner",
+						"outputs": [
+							{
+								"internalType": "address",
+								"name": "",
+								"type": "address"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					},
+					{
+						"inputs": [
+							{
+								"internalType": "bytes32",
+								"name": "",
+								"type": "bytes32"
+							}
+						],
+						"name": "rights",
+						"outputs": [
+							{
+								"internalType": "bool",
+								"name": "",
+								"type": "bool"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					}
+				];
+				const address2 = "0x9345a6eaaee3993a6f1b93cb6c34b7326802d930";
 
+				window.contract = await new window.web3.eth.Contract(abi2, address2);
+				const data2 = await contract.methods.checkRights(book).call(); 
+				document.getElementById("show-book-content-div2").innerHTML = data2+".";
+				document.getElementById("outer-div2").style.display = 'block';
 				
-
 			}
