@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Bookshelf</title>
   
+  <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
@@ -77,6 +78,7 @@
 	<div class="topnav">
 	  <a class="active" id="nav-opt1">About Us</a>
 	  <a id="nav-opt2"> Books</a>
+	  <a id="nav-opt5"> Books Content </a>
 	  <a id="nav-opt3">Contact Us</a>
       <a id="nav-opt4">Metamask</a>
 	</div>
@@ -85,10 +87,10 @@
   <div class="container" id="aboutus-div" hidden>
 		<section id="about">
 			<h1>About Us</h1>
-			<div id="aboutus-inner-div"></div>
+			<div id="aboutus-inner-div"><p>The Bookshelf is a family-owned online bookstore founded in 2021. Our mission is to provide book lovers with a wide selection of high-quality books at affordable prices. We believe that reading is not only a hobby, but also a way to expand your knowledge and enrich your life.</p> <p>At The Bookshelf, we pride ourselves on our knowledgeable and friendly staff. Whether you're looking for a specific book recommendation or just want to chat about your favorite author, we're always happy to help.</p> <p>We are proud to accept a variety of payment options, including credit cards, PayPal, and cryptocurrency. We believe that cryptocurrency is the future of online payments, and we're excited to offer this option to our customers. With cryptocurrency, you can make purchases quickly, securely, and without the need for a bank account or credit card.</p> <p>Thank you for choosing The Bookshelf as your go-to destination for all things books!</p></div>
 		</section>
   </div>
-  <div class="container" id="books-div" hidden>
+  <div class="container" id="books-div">
     <h2 class="title">Discover the Best Book</h2>
     <div class="shop-content">
       <div class="book-box">
@@ -169,7 +171,16 @@
       </div>
     </div>
   </div>
-
+  <div class="container" id="content-div" hidden>
+	<label for="booktitle" class="booktitle" >Book Title</label>
+			<input class="booktitle" type="text" id="booktitle" name="booktitle" placeholder="Book Title.." required>
+		</input>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="booktitle" type="submit" value="Search Content" id="book-title-search" onclick="getbookcontent()">
+		
+		<div id="outer-div"><span id="content-span">Book Content: </span>
+		<div id="show-book-content-div" hidden>
+		</div></div>
+  </div>
   <div class="container" id="contactus-div" hidden>
 		<h1>Contact Us</h1>
 		<form>
@@ -194,13 +205,13 @@
   <div class="container" id="matmask-div" hidden>
 	ye matamask wala div hai.
   </div>
-  <div class="footer text-center">
+  <div class="footer">
 	<center><p>&copy; 2023 The Bookshelf. All Rights Reserved.</p><center>
 </div>
 
 	<!-- inlcuded js and css files -->
 	<link rel="stylesheet" href="\css\home.css">
-	<script type="text/javascript" src="\js\sample.js"></script>
+	<!-- <script type="text/javascript" src="\js\sample.js"></script> -->
 	<script type="text/javascript" src="\js\home.js"></script>
 	<!-- end -->
 

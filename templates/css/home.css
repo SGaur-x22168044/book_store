@@ -487,6 +487,16 @@ footer {
 			color: #fff;
 			padding: 1rem 0;
 			margin-top: 2rem;
+			
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			position: fixed;
+
+			height: 50px;
+			right: 0px;
+			margin-bottom: 0px;
+						
 		}
 		
 		body {
@@ -530,4 +540,25 @@ input[type=submit] {
 
 input[type=submit]:hover {
 	background-color: #45a049;
+}
+
+.booktitle{
+	padding:3%;
+}
+
+#content-div{
+	margin-top:2%;
+	
+}
+#show-book-content-div{
+	margin-top:3%;
+	margin-left:6%;
+}
+#content-span{
+	margin-left:6%;
+	font-size: 1.4rem;
+}
+
+#outer-div{
+	margin-top:3%;
 }

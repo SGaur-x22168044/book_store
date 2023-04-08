@@ -1,12 +1,8 @@
-var aboutus= "<p>The Bookshelf is a family-owned online bookstore founded in 2021. Our mission is to provide book lovers with a wide selection of high-quality books at affordable prices. We believe that reading is not only a hobby, but also a way to expand your knowledge and enrich your life.</p> <p>At The Bookshelf, we pride ourselves on our knowledgeable and friendly staff. Whether you're looking for a specific book recommendation or just want to chat about your favorite author, we're always happy to help.</p> <p>We are proud to accept a variety of payment options, including credit cards, PayPal, and cryptocurrency. We believe that cryptocurrency is the future of online payments, and we're excited to offer this option to our customers. With cryptocurrency, you can make purchases quickly, securely, and without the need for a bank account or credit card.</p> <p>Thank you for choosing The Bookshelf as your go-to destination for all things books!</p>";
-$(document).ready(function(){
-		$("#aboutus-inner-div").html(aboutus);
-	});
-		$(document).ready(function(){
-		  $("#nav-opt4").click(function(){
-				$(".container").hide();
-				$("#matmask-div").show();
-		  });
+	  $(document).ready(function(){
+			$("#nav-opt4").click(function(){
+				  $(".container").hide();
+				  $("#matmask-div").show();
+			});
 	  });
         $(document).ready(function(){
 		  $("#nav-opt5").click(function(){
@@ -33,6 +29,13 @@ $(document).ready(function(){
 				$(".container").hide();
 				$("#contactus-div").show();
 		  });
+	  });
+
+	  $(document).ready(function(){
+		$("#nav-opt5").click(function(){
+			  $(".container").hide();
+			  $("#content-div").show();
+		});
 	  });
 
 		const btnCart=document.querySelector('#cart-icon');
@@ -177,3 +180,100 @@ $(document).ready(function(){
 
 
 		}
+
+
+	//---------------------------------------------------------------------------------------------------------
+			const getbookcontent = async() => {
+				var book = document.getElementById('booktitle').value.toLowerCase();
+
+				const address = "0x1143323236545f4f983649b2962c5143d04cbb1f";
+				const abi = [
+					{
+						"inputs": [],
+						"stateMutability": "nonpayable",
+						"type": "constructor"
+					},
+					{
+						"inputs": [
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							}
+						],
+						"name": "addBook",
+						"outputs": [],
+						"stateMutability": "nonpayable",
+						"type": "function"
+					},
+					{
+						"inputs": [
+							{
+								"internalType": "string",
+								"name": "",
+								"type": "string"
+							}
+						],
+						"name": "books",
+						"outputs": [
+							{
+								"internalType": "string",
+								"name": "",
+								"type": "string"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					},
+					{
+						"inputs": [
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							}
+						],
+						"name": "getBook",
+						"outputs": [
+							{
+								"internalType": "string",
+								"name": "",
+								"type": "string"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					},
+					{
+						"inputs": [],
+						"name": "owner",
+						"outputs": [
+							{
+								"internalType": "address",
+								"name": "",
+								"type": "address"
+							}
+						],
+						"stateMutability": "view",
+						"type": "function"
+					}
+				]
+				;
+				
+				const owner = "0x8F3d1A824CF79f0D67bC74341337a4Af7c0527De";
+				const rpcURL = 'https://sepolia.infura.io/v3/9af3d49403744c9c9a89c430f843dedc';
+				window.web3 = await new Web3(rpcURL);
+				window.contract = await new window.web3.eth.Contract(abi, address);
+				const data = await contract.methods.getBook(book).call(); 
+				document.getElementById("show-book-content-div").innerHTML = data+".";
+				document.getElementById("show-book-content-div").style.display = 'block';
+
+
+				
+
+			}
