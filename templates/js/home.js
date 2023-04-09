@@ -1,4 +1,8 @@
-	  $(document).ready(function(){
+function googleTranslateElementInit() {
+	new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+	 
+	 $(document).ready(function(){
 			$("#nav-opt4").click(function(){
 				  $(".container").hide();
 				  $("#payment-div").show();
