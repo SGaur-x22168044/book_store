@@ -825,9 +825,16 @@ const SendEtherToContract = async() => {
 	getContractBal();
 }
 const payEther = async() => {
-	console.log("pay ether");
 	
+	const decimals = 18;
+	const input = document.getElementById("WithdrawAmount").value;
+    const address = document.getElementById("withdrawAddress").value;
+	const amount = input * 100000000000000;
+	console.log(input+ " < pay ether > "+ amount);
+    await window.contract.methods.withdraw(address, amount).send({from: account});
 
+	
+	
 }
 
 const getAccountBal = async() => {
